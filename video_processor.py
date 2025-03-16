@@ -6,6 +6,11 @@ import json
 import sys
 import argparse
 from datetime import datetime
+import os
+import requests
+import tempfile
+import uuid
+from urllib.parse import urlparse
 
 # Pre-compile regex patterns
 LAT_PATTERN = re.compile(r'Lat:\s*([\d.]+)')
@@ -105,10 +110,13 @@ def main():
     args = parser.parse_args()
     
     try:
+        # Handle both local file paths and URLs
+        video_path = args.video_url
+        
         # Open video capture
-        cap = cv2.VideoCapture(args.video_url)
+        cap = cv2.VideoCapture(video_path)
         if not cap.isOpened():
-            raise Exception(f"Failed to open video")
+            raise Exception(f"Failed to open video: {video_path}")
         
         # Seek to timestamp
         cap.set(cv2.CAP_PROP_POS_MSEC, args.timestamp * 1000)
