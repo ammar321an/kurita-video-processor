@@ -1,7 +1,7 @@
 flask==2.3.3
-werkzeug==2.0.3
+werkzeug>=2.3.7
 gunicorn==20.1.0
-opencv-python==4.11.0.86
+opencv-python==4.8.0.76
 pytesseract==0.3.13
 numpy==1.26.4
 python-dotenv==0.19.1
